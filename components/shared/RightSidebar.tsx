@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import RenderTag from './RenderTag';
 
 const RightSidebar = () => {
   const hotQuestions = [
@@ -21,10 +22,10 @@ const RightSidebar = () => {
   ];
 
   const popularTags = [
-    { _id: 1, name: 'JavaScript', count: 20152 },
-    { _id: 2, name: 'Next.JS', count: 85464 },
-    { _id: 3, name: 'React.JS', count: 85464 },
-    { _id: 4, name: 'TypeScript', count: 85464 },
+    { _id: '1', name: 'JavaScript', count: 20152 },
+    { _id: '2', name: 'Next.JS', count: 85464 },
+    { _id: '3', name: 'React.JS', count: 85464 },
+    { _id: '4', name: 'TypeScript', count: 85464 },
   ];
 
   return (
@@ -56,16 +57,13 @@ const RightSidebar = () => {
         <h3 className=" h3-bold text-dark200_light900">Popular Tags</h3>
         <div className="flex flex-col gap-4">
           {popularTags.map((tag) => (
-            <Link
+            <RenderTag
               key={tag._id}
-              href={`/tags/${tag._id}`}
-              className="text-dark200_light900 flex-between  w-auto cursor-pointer"
-            >
-              <p className="background-light800_dark300 rounded px-4 py-2 text-light-400 ">
-                {tag.name}
-              </p>
-              <p className="small-medium text-dark500_light700">{tag.count}</p>
-            </Link>
+              _id={tag._id}
+              name={tag.name}
+              totalQuestions={tag.count}
+              showCount={true}
+            />
           ))}
         </div>
       </div>

@@ -17,6 +17,9 @@ import {
 import { Input } from '@/components/ui/input';
 import { QuestionsSchema } from '@/lib/validations';
 
+import React, { useRef } from 'react';
+import { Editor } from '@tinymce/tinymce-react';
+
 const Questions = () => {
   // 1. Define your form.
   const form = useForm<z.infer<typeof QuestionsSchema>>({
@@ -27,6 +30,8 @@ const Questions = () => {
       tags: [],
     },
   });
+
+  const editorRef = useRef(null);
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof QuestionsSchema>) {
@@ -70,7 +75,46 @@ const Questions = () => {
                 <span className="text-primary-500">*</span>
               </FormLabel>
               <FormControl className="mt-3.5">
-                {/* TODO: Replace with a rich text editor */}
+                <Editor
+                  apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_API_KEY}
+                  onInit={(evt, editor) =>
+                    // @ts-ignore
+                    (editorRef.current = editor)
+                  }
+                  initialValue="<p>Start typing here...</p>"
+                  init={{
+                    height: 350,
+                    menubar: false,
+                    plugins: [
+                      'advlist',
+                      'autolink',
+                      'lists',
+                      'link',
+                      'image',
+                      'charmap',
+                      'codesample',
+                      'preview',
+                      'anchor',
+                      'searchreplace',
+                      'visualblocks',
+                      'code',
+                      'fullscreen',
+                      'insertdatetime',
+                      'media',
+                      'table',
+                      'code',
+                      'help',
+                      'wordcount',
+                    ],
+                    toolbar:
+                      'undo redo | codesample | blocks | ' +
+                      'bold italic forecolor | alignleft aligncenter ' +
+                      'alignright alignjustify | bullist numlist outdent indent | ' +
+                      'removeformat | help',
+                    content_style:
+                      'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+                  }}
+                />
               </FormControl>
               <FormDescription className="body-regular mt-2.5 text-light-500">
                 Introduce the problem and expand on what you put in the title.

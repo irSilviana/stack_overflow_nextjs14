@@ -1,6 +1,10 @@
-import Filters from '@/components/shared/search/Filters';
+import HomeFilters from '@/components/home/HomeFilters';
+import QuestionCard from '@/components/home/QuestionCard';
+import Filter from '@/components/shared/Filter';
 import LocalSearchBar from '@/components/shared/search/LocalSearchBar';
 import { Button } from '@/components/ui/button';
+import { HomePageFilters } from '@/constants/filters';
+
 import Link from 'next/link';
 
 const Home = () => {
@@ -15,11 +19,25 @@ const Home = () => {
           </Button>
         </Link>
       </div>
-      <div className="mt-11 flex items-center justify-between gap-5 max-sm:flex-col">
-        <LocalSearchBar />
 
-        <Filters />
+      <div className="mt-11 flex justify-between gap-5 max-sm:flex-col sm:items-center">
+        <LocalSearchBar
+          route="/"
+          iconPosition="left"
+          imgSrc="/assets/icons/search.svg"
+          placeholder="Search for questions..."
+          otherClasses="flex-1"
+        />
+        <Filter
+          filters={HomePageFilters}
+          otherClasses="min-h-[56px] sm:min-w-[170px]"
+          containerClasses="hidden max-md:flex"
+        />
       </div>
+
+      <HomeFilters />
+
+      <QuestionCard />
     </>
   );
 };

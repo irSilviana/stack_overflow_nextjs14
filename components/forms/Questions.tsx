@@ -21,6 +21,7 @@ import React, { useRef, useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { Badge } from '../ui/badge';
 import Image from 'next/image';
+import { createQuestion } from '@/lib/actions/question.action';
 
 const type: any = 'create';
 
@@ -39,11 +40,14 @@ const Questions = () => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof QuestionsSchema>) {
+  async function onSubmit(values: z.infer<typeof QuestionsSchema>) {
     setIsSubmitting(true);
 
     try {
       // make an async request to your API -> Create a question
+
+      await createQuestion({});
+
       //  contain all form data
       // navigate to the home page
     } catch (error) {
@@ -88,6 +92,7 @@ const Questions = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        {/* Form field TITLE */}
         <FormField
           control={form.control}
           name="title"
@@ -110,6 +115,7 @@ const Questions = () => {
             </FormItem>
           )}
         />
+        {/* Form field EXPLANATION */}
         <FormField
           control={form.control}
           name="explanation"
@@ -126,6 +132,8 @@ const Questions = () => {
                     // @ts-ignore
                     (editorRef.current = editor)
                   }
+                  onBlur={field.onBlur}
+                  onEditorChange={(content) => field.onChange(content)}
                   initialValue="<p>Start typing here...</p>"
                   init={{
                     height: 350,
@@ -168,6 +176,7 @@ const Questions = () => {
             </FormItem>
           )}
         />
+        {/* Form field TAGS */}
         <FormField
           control={form.control}
           name="tags"

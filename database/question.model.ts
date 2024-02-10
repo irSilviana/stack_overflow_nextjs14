@@ -1,5 +1,6 @@
 import { Schema, model, models, Document } from 'mongoose';
 
+// 1. Create an interface representing a document in MongoDB.
 export interface IQuestion extends Document {
   title: string;
   content: string;
@@ -12,6 +13,7 @@ export interface IQuestion extends Document {
   createdAt: Date;
 }
 
+// 2. Create a Schema corresponding to the document interface.
 const QuestionSchema = new Schema<IQuestion>({
   title: {
     type: String,
@@ -61,6 +63,7 @@ const QuestionSchema = new Schema<IQuestion>({
   },
 });
 
+// 3. Create a Model.
 const Question =
   models.Question || model<IQuestion>('Question', QuestionSchema);
 

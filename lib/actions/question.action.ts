@@ -2,9 +2,30 @@
 
 import Question from '@/database/question.model';
 import { connectToDatabase } from '../mongoose';
+import { CreateQuestionParams, GetQuestionsParams } from './shared.types';
 import Tag from '@/database/tag.model';
+import User from '@/database/user.model';
 
-export async function createQuestion(params: any) {
+export async function getQuestions(params: GetQuestionsParams) {
+  try {
+    // connect to the database
+    connectToDatabase();
+
+    // return all questions
+    const questions = await Question.find({})
+      .populate({ path: 'tags', model: Tag })
+      .populate({ path: 'author', model: User });
+
+    return { questions };
+
+    // const { page, pageSize, searchQuery, filter } = params;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+export async function createQuestion(params: CreateQuestionParams) {
   try {
     // connect to the database
     connectToDatabase();
@@ -12,7 +33,6 @@ export async function createQuestion(params: any) {
     const { title, content, tags, author, path } = params;
 
     // create a question
-
     const question = await Question.create({
       title,
       content,

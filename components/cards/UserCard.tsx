@@ -27,7 +27,7 @@ const UserCard = ({ _id, name, username, picture, topTags }: UserCardProps) => {
         <h3 className="sm:h3-semibold base-semibold text-dark200_light900 line-clamp-1 flex-1">
           {name}
         </h3>
-        <p>@{username}</p>
+        <p className="text-center">@{username}</p>
       </Link>
 
       <div className="mt-3.5 flex flex-wrap gap-2">

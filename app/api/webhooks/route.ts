@@ -1,3 +1,17 @@
+/* 
+This is the route file for the webhooks API
+This file handles the incoming webhooks from Clerk
+It listens for user created, updated and deleted events
+It then creates, updates or deletes the user in the database accordingly
+The route is protected by the Clerk middleware
+It is also protected by the Clerk Webhook secret
+The Clerk Webhook secret is used to verify the incoming webhook payload
+Source: https://docs.clerk.dev/guides/webhooks
+Source: https://clerk.com/docs/users/sync-data
+
+Path: app/api/webhooks/route.ts
+ */
+
 /* eslint-disable camelcase */
 import { Webhook } from 'svix';
 import { headers } from 'next/headers';

@@ -14,7 +14,7 @@ export const sidebarLinks: SidebarLink[] = [
   },
   {
     imgURL: '/assets/icons/users.svg',
-    route: '/commnunity',
+    route: '/community',
     label: 'Community',
   },
   {

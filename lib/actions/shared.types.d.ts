@@ -1,3 +1,11 @@
+/* 
+Type definitions for shared types
+Project: stackoverflow-clone
+Definitions: 
+This file contains type definitions that are shared across multiple files in the app.
+It is used to ensure type consistency across the app
+ */
+
 import { Schema } from 'mongoose';
 import { IUser } from '@/mongodb';
 

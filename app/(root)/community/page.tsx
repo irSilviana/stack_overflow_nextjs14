@@ -26,22 +26,9 @@ export default async function Community() {
         />
       </div>
 
-      <section className="mt-12 flex flex-wrap  gap-4">
+      <section className="mt-12 flex flex-wrap gap-4">
         {result.users.length > 0 ? (
-          result.users.map((user) => (
-            <UserCard
-              key={user._id}
-              _id={user._id}
-              name={user.name}
-              username={user.username}
-              picture={user.picture}
-              topTags={[
-                { _id: '1', name: 'react', count: 2 },
-                { _id: '2', name: 'javascript', count: 3 },
-                { _id: '3', name: 'nodejs', count: 1 },
-              ]}
-            />
-          ))
+          result.users.map((user) => <UserCard key={user._id} user={user} />)
         ) : (
           <NoResult
             title="There's no user to show"

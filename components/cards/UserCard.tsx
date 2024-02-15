@@ -1,48 +1,64 @@
 import Image from 'next/image';
 import RenderTag from '../shared/RenderTag';
 import Link from 'next/link';
+import { getTopInteractedTags } from '@/lib/actions/tag.action';
+import { Badge } from '../ui/badge';
 
 interface UserCardProps {
-  _id: string;
-  name: string;
-  username: string;
-  picture: string;
-  topTags: { _id: string; name: string; count: number }[];
+  user: {
+    _id: string;
+    ClerkId: string;
+    name: string;
+    username: string;
+    picture: string;
+  };
 }
 
-const UserCard = ({ _id, name, username, picture, topTags }: UserCardProps) => {
+const UserCard = async ({ user }: UserCardProps) => {
+  const interactedTags = await getTopInteractedTags({ userId: user._id });
+
   return (
-    <article
-      className="card-wrapper flex w-[260px] flex-col items-center gap-5 rounded-[10px] px-7 py-[30px]"
-      key={_id}
+    <Link
+      href={`/profile/${user.username}`}
+      className="shadow-light100_darknone w-full max-xs:min-w-full xs:w-[260px]"
     >
-      <Link href={`/profile/${_id}`} className=" flex flex-col items-center">
+      <article className="background-light900_dark200 light-border flex w-full flex-col items-center justify-center rounded-2xl border p-8">
         <Image
-          src={picture}
-          alt={`${name} profile picture`}
+          src={user.picture}
+          alt={`${user.name} profile picture`}
           width={100}
           height={100}
-          className="rounded-full object-cover"
+          className="rounded-full"
         />
-        <h3 className="sm:h3-semibold base-semibold text-dark200_light900 line-clamp-1 flex-1">
-          {name}
-        </h3>
-        <p className="text-center">@{username}</p>
-      </Link>
 
-      <div className="mt-3.5 flex flex-wrap gap-2">
-        {topTags &&
-          topTags.map((tag) => (
-            <RenderTag
-              key={tag._id}
-              _id={tag._id}
-              name={tag.name}
-              totalQuestions={tag.count}
-              showCount={false}
-            />
-          ))}
-      </div>
-    </article>
+        <div className="mt-4 text-center">
+          <h3 className="h3-bold text-dark200_light900 line-clamp-1">
+            {user.name}
+          </h3>
+          <p className="body-regular text-dark500_light500 mt-2">
+            @{user.username}
+          </p>
+        </div>
+
+        <div className="mt-5">
+          {interactedTags.length > 0 ? (
+            <div className="flex items-center gap-2">
+              {interactedTags.map((tag) => (
+                <RenderTag
+                  key={tag._id}
+                  _id={tag._id}
+                  name={tag.name}
+                  totalQuestions={0}
+                  showCount={false}
+                />
+              ))}
+            </div>
+          ) : (
+            <Badge>No tags yet</Badge>
+          )}
+        </div>
+      </article>
+    </Link>
   );
 };
 export default UserCard;

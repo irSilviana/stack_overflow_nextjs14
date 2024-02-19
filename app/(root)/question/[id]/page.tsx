@@ -7,7 +7,7 @@ import { getTimeStamp, formatNumber } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const Question = async ({ params, searchParams }) => {
+const Question = async ({ params }: { params: { id: string } }) => {
   const result = await getQuestionById({ questionId: params.id });
 
   return (

@@ -32,7 +32,7 @@ export default async function Community() {
         ) : (
           <NoResult
             title="There's no user to show"
-            description=" Be the first to break the silence! 🚀Be auser and kickstart the discussion. Our query could be the next big thing others learn from. Get involved! 💡"
+            description=" Be the first to break the silence! 🚀Be a user and kickstart the discussion. Our query could be the next big thing others learn from. Get involved! 💡"
             link="/sign-up"
             linkTitle="Sign Up"
           />

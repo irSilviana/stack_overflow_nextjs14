@@ -64,7 +64,7 @@ const Question = async ({ params }: { params: { id: string } }) => {
         />
       </div>
 
-      <ParseHTML data={result.content} />
+      <ParseHTML />
     </>
   );
 };

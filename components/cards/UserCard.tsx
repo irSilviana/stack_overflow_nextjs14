@@ -26,7 +26,7 @@ const UserCard = async ({ user }: UserCardProps) => {
             alt={`${user.name} profile picture`}
             width={100}
             height={100}
-            className="rounded-full"
+            className="mx-auto rounded-full object-contain"
           />
 
           <div className="mt-4 text-center">

@@ -17,7 +17,7 @@ const NavContent = () => {
   const pathname = usePathname();
 
   return (
-    <section className="flex h-full flex-col gap-6 pt-6">
+    <section className="flex h-full flex-col gap-6 pt-8">
       {sidebarLinks.map((link) => {
         const isActive =
           pathname === link.route ||
@@ -61,7 +61,7 @@ const MobileNav = () => {
       </SheetTrigger>
       <SheetContent
         side="left"
-        className="background-light900_dark200 border-none"
+        className="background-light900_dark200 touch-auto overflow-y-scroll border-none"
       >
         <Link href="/" className="flex items-center gap-1">
           <Image

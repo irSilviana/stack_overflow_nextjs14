@@ -99,7 +99,7 @@ export async function getAllUsers(params: GetAllUsersParams) {
   }
 }
 
-export async function toogleSaveQuestion(params: ToggleSaveQuestionParams) {
+export async function toggleSaveQuestion(params: ToggleSaveQuestionParams) {
   try {
     connectToDatabase();
 
@@ -111,7 +111,7 @@ export async function toogleSaveQuestion(params: ToggleSaveQuestionParams) {
       throw new Error('User not found');
     }
 
-    // if the question has  already been saved
+    // if the question has already been saved
     const isQuestionSaved = user.saved.includes(questionId);
 
     if (isQuestionSaved) {

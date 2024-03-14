@@ -1,5 +1,3 @@
-// import { getQuestionById } from '@/lib/actions/question.action';
-
 import Answer from '@/components/forms/Answer';
 import AllAnswers from '@/components/shared/AllAnswers';
 import Metric from '@/components/shared/Metric';
@@ -15,6 +13,7 @@ import Link from 'next/link';
 
 const Question = async ({ params }: { params: { id: string } }) => {
   const result = await getQuestionById({ questionId: params.id });
+
   const { userId: ClerkId } = auth();
 
   let mongoUser;
@@ -44,7 +43,7 @@ const Question = async ({ params }: { params: { id: string } }) => {
 
           <div className="flex justify-end">
             <Votes
-              type="question"
+              type="Question"
               itemId={JSON.stringify(result._id)}
               userId={JSON.stringify(mongoUser._id)}
               upvotes={result.upvotes.length}

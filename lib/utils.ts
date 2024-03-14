@@ -51,6 +51,9 @@ export function getTimeStamp(createdAt: Date): string {
 }
 
 export function formatNumber(num: number): string {
+  if (typeof num !== 'number') {
+    num = Number(num);
+  }
   if (num >= 1000000000) {
     return (num / 1000000000).toFixed(1) + 'B';
   } else if (num >= 1000000) {
@@ -60,8 +63,4 @@ export function formatNumber(num: number): string {
   } else {
     return num.toString();
   }
-}
-
-export function formatAndDivideNumber(num: number): string {
-  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }

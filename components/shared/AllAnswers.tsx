@@ -6,8 +6,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ParseHTML from './ParseHTML';
 import Votes from './Votes';
-import { auth } from '@clerk/nextjs';
-import { getUserById } from '@/lib/actions/user.action';
 
 interface Props {
   questionId: string;

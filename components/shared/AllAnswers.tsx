@@ -6,6 +6,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ParseHTML from './ParseHTML';
 import Votes from './Votes';
+import { auth } from '@clerk/nextjs';
+import { getUserById } from '@/lib/actions/user.action';
 
 interface Props {
   questionId: string;
@@ -23,6 +25,7 @@ const AllAnswers = async ({
   filter,
 }: Props) => {
   const result = await getAnswers({ questionId });
+
   return (
     <div className="mt-11">
       <div className="flex items-center justify-between">
@@ -56,7 +59,15 @@ const AllAnswers = async ({
                   </div>
                 </Link>
                 <div className="flex justify-end">
-                  <Votes />
+                  <Votes
+                    type="Answer"
+                    itemId={JSON.stringify(answer._id)}
+                    userId={JSON.stringify(userId)}
+                    upvotes={answer.upvotes.length}
+                    hasupVoted={answer.upvotes.includes(userId)}
+                    downvotes={answer.downvotes.length}
+                    hasdownVoted={answer.downvotes.includes(userId)}
+                  />
                 </div>
               </div>
             </div>

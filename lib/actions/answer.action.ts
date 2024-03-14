@@ -6,7 +6,6 @@ import {
   AnswerVoteParams,
   CreateAnswerParams,
   GetAnswersParams,
-  QuestionVoteParams,
 } from './shared.types';
 import { revalidatePath } from 'next/cache';
 import Question from '@/database/question.model';

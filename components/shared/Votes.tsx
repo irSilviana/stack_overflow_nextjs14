@@ -7,7 +7,7 @@ import {
 } from '@/lib/actions/question.action';
 import { formatNumber } from '@/lib/utils';
 import Image from 'next/image';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 interface Props {
   type: string;
@@ -34,7 +34,6 @@ const Votes = ({
   console.log('Type of downvotes:', typeof downvotes);
 
   const pathname = usePathname();
-  const router = useRouter();
 
   const handleSave = () => {};
 

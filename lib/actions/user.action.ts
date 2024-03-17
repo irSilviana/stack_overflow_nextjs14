@@ -146,7 +146,11 @@ export async function getSavedQuestions(params: GetSavedQuestionsParams) {
     // connect to the database
     connectToDatabase();
 
-    const { clerkId, searchQuery, page = 1, pageSize = 10, filter } = params;
+    const {
+      clerkId,
+      searchQuery,
+      // page = 1, pageSize = 10, filter
+    } = params;
 
     const query: FilterQuery<typeof Question> = searchQuery
       ? { title: { $regex: new RegExp(searchQuery, 'i') } }

@@ -5,10 +5,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '../ui/button';
-import { SignedOut } from '@clerk/nextjs';
+import { SignedOut, useAuth } from '@clerk/nextjs';
 
 const LeftSidebar = () => {
   const pathname = usePathname();
+  const { userId } = useAuth();
 
   return (
     <section className="light-border background-light900_dark200 custom-scrollbar sticky left-0 top-0 flex h-screen flex-col justify-between overflow-y-auto border-r p-6 pt-36 shadow-light-300 dark:shadow-none max-sm:hidden lg:w-[266px]">
@@ -17,6 +18,16 @@ const LeftSidebar = () => {
           const isActive =
             pathname === link.route ||
             (pathname.includes(link.route) && link.route.length > 1);
+
+          // If the user is signed in, we want to redirect to their profile page
+          if (link.route === '/profile') {
+            if (userId) {
+              link.route = `/profile/${userId}`;
+            } else {
+              return null;
+            }
+          }
+
           return (
             <Link
               key={link.route}

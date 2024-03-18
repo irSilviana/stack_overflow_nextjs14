@@ -10,7 +10,7 @@ export interface ITag extends Document {
 }
 
 // 2. Create a Schema corresponding to the document interface.
-const TagSchema = new Schema<ITag>({
+const TagSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -41,6 +41,6 @@ const TagSchema = new Schema<ITag>({
 });
 
 // 3. Create a Model.
-const Tag = models.Tag || model<ITag>('Tag', TagSchema);
+const Tag = models.Tag || model('Tag', TagSchema);
 
 export default Tag;

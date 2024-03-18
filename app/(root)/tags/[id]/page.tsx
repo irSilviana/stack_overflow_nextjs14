@@ -5,14 +5,12 @@ import LocalSearchBar from '@/components/shared/search/LocalSearchBar';
 import { getQuestionsByTagId } from '@/lib/actions/tag.action';
 import { URLProps } from '@/types';
 
-const TagDetail = async ({ params, searchParams }: URLProps) => {
+const Page = async ({ params, searchParams }: URLProps) => {
   const result = await getQuestionsByTagId({
     tagId: params.id,
     page: 1,
     searchQuery: searchParams.q,
   });
-
-  console.log(result);
 
   return (
     <>
@@ -55,4 +53,4 @@ const TagDetail = async ({ params, searchParams }: URLProps) => {
     </>
   );
 };
-export default TagDetail;
+export default Page;
